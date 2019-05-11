@@ -15,7 +15,7 @@ function createThings() {
     subscribe,
 
     // expose an immer based update
-    immerUpdate: draftUpdater => update(produce(draftUpdater))
+    immerProduceUpdate: draftUpdater => update(produce(draftUpdater))
   };
 }
 

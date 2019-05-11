@@ -9,3 +9,4 @@
 </style>
 
 <h1>Hello {name}!</h1>
+<p>Open the devtools console to see test results</p>
