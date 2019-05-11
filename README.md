@@ -11,6 +11,19 @@ of the box. So I used Immer, which I recommend highly.
 NOTE: this code is meant as an overview, and may have typos, or require you to
 actually read the working source.
 
+## Before getting angry about immutability
+
+I prefer immutabile data for a few reasons, the main being that we all make
+mistakes, and have days where we are dumb as hell. Avoiding bugs created due
+to the referencial nature of javascript objects is, imo, a good thing.
+
+If you don't know what a reference is or how it can create bugs, google is your
+friend. Here is an article, your mileage may vary.
+
+https://techblog.commercetools.com/mutating-objects-what-can-go-wrong-7b89d4b8b1ac
+
+There is more to say on this, but not here.
+
 ## Running the examples
 
 ```shell
