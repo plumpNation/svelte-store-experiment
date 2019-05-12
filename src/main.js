@@ -28,7 +28,7 @@ things.subscribe(values => {
   } else {
     testMutation(prevValues, values);
 
-    console.log('Test finished for', values[0].message);
+    console.log('Test finished for', values[0].updateType);
   }
 
   prevValues = values;
@@ -40,17 +40,17 @@ things.update(values => {
 	const existingStoreValues = get(things);
 
 	console.assert(
-    existingStoreValues[0].message === values[0].message,
-    'values should be identical at this point', values[0].message
+    existingStoreValues[0].updateType === values[0].updateType,
+    'values should be identical at this point', values[0].updateType
   );
 
   // mutate store data
-  values[0].message = 'svelte update';
+  values[0].updateType = 'svelte only';
 
   // Ideally, values should be different at this point.
   console.assert(
-    existingStoreValues[0].message !== values[0].message,
-    'store mutated instantly within the update function by', values[0].message
+    existingStoreValues[0].updateType !== values[0].updateType,
+    'store mutated instantly within the update function by', values[0].updateType
   );
 
   return values;
@@ -58,13 +58,13 @@ things.update(values => {
 
 // By utilising immer, we can add that functionality in a very simple way
 things.update(produce(draft => {
-  draft[0].message = 'immer update';
+  draft[0].updateType = 'svelte with immer';
 }));
 
 // If we add the immer functionality inside our stores, developers do not have
 // to think about this when updating.
 things.immerProduceUpdate(draft => {
-  draft[0].message = 'immer inside store update';
+  draft[0].updateType = 'immer inside svelte store';
 
   // NOTE: we don't need to `return`, because internally it's `immer.produce`.
   // This could be a source of confusion for devs, but it won't break anything
@@ -74,11 +74,11 @@ things.immerProduceUpdate(draft => {
 function testMutation(prev, current) {
   console.assert(
     current !== prev,
-    'array has been mutated by', current[0].message
+    'array has been mutated by', current[0].updateType
   );
 
   console.assert(
     current[0] !== prev[0],
-    'array[0] has been mutated by', current[0].message
+    'array[0] has been mutated by', current[0].updateType
   );
 }
